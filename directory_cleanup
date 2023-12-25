@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# a Bash script that cleans up a directory by organizing 
+#+ files into subdirectories based on their file extensions.
+
+# read input from user, 'r' option to treat backslashes as literal characters
+read -rp "Input Directory Path: " dir
+if [ ! -d "$dir" ];then
+	echo "$dir not a directory Path"
+else
+	# create subdirectories. Use 'mkdir -p' to create parent directories if they do not exist
+	#+ but this script will be focused on directories that already exist
+	# subdirectories 'a' and 'b' are just examples to test the script. They can be changed, depending on the type of files
+	#+ and file extensions you're working with
+
+	mkdir "$dir/a" "$dir/b" "$dir/others/"
+	for file in "$dir"/*;do
+		if [ -f "$file" ];then
+			extension=${file##*.}
+		fi
+		case "$extension" in
+			a)
+				mv "$file" "$dir/a/"
+				;;
+			b)
+				mv "$file" "$dir/b/"
+				;;
+			*)
+				mv "$file" "$dir/others/"
+		esac
+	done
+fi
+
