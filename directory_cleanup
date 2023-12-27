@@ -12,11 +12,10 @@ else
 	# subdirectories 'a' and 'b' are just examples to test the script. They can be changed, depending on the type of files
 	#+ and file extensions you're working with
 
-	mkdir "$dir/a" "$dir/b" "$dir/others/"
 	for file in "$dir"/*;do
 		if [ -f "$file" ];then
 			extension=${file##*.}
-		fi
+			mkdir -p "$dir/$extension/"
 		case "$extension" in
 			a)
 				mv "$file" "$dir/a/"
@@ -26,7 +25,9 @@ else
 				;;
 			*)
 				mv "$file" "$dir/others/"
+				;;
 		esac
+		fi
 	done
 fi
 
