@@ -11,17 +11,20 @@ else
 	#+ but this script will be focused on directories that already exist
 	# subdirectories 'a' and 'b' are just examples to test the script. They can be changed, depending on the type of files
 	#+ and file extensions you're working with
-
+	mkdir -p "a" "b" "c" "others"
 	for file in "$dir"/*;do
-		if [ -f "$file" ];then
+		# check if 'file' is a regular file and not an executable file(dso program does not move the executable file)
+		if [ -f "$file" ] && [ ! -x "$file" ];then
 			extension=${file##*.}
-			mkdir -p "$dir/$extension/"
 		case "$extension" in
 			a)
 				mv "$file" "$dir/a/"
 				;;
 			b)
 				mv "$file" "$dir/b/"
+				;;
+			c)
+				mv "$file" "$dir/c/"
 				;;
 			*)
 				mv "$file" "$dir/others/"
