@@ -1,10 +1,12 @@
-# Directory Cleanup Bash Script
+i# Directory Cleanup Bash Script
 
 ## Overview
 
 This Bash script is designed to organize files in a specified directory by moving them into subdirectories based on their file extensions. It also dynamically creates subdirectories as needed.
 
 ## Usage
+
+* Executable file should be in the parent directory of the directory to be cleaned up.
 
 1. **Run the Script:**
     - Make the script executable: `chmod +x your_script_name.sh`
