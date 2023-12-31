@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# a Bash script that cleans up a directory by organizing
+#+ files into subdirectories based on their file extensions.
+# with dynamical directory creation
+
+# read input from user
+read -rp "Input Directory Path: " parent_dir
+echo "$parent_dir"
+if [ ! -d "$parent_dir" ];then
+echo "Not a valid Directory"
+
+else
+for file in "$parent_dir"/*;do
+        echo "$file"
+        if [ -f "$file" ] && [ ! -x "$file" ];then
+                # extension=$(file -mime-type "$file" | cut -d '/' -f2)
+                extension=${file##*.}
+                echo "$extension"
+                dir="$parent_dir/$extension"
+                if [ ! -d "$dir" ];then
+                mkdir -p "$dir"
+                fi
+        fi
+        mv "$file" "$dir/"
+
+
+done
+echo "Directory succesfully cleaned!!"
+fi
+
