@@ -13,15 +13,18 @@ else
 for file in "$parent_dir"/*;do
         echo "$file"
         if [ -f "$file" ] && [ ! -x "$file" ];then
-                # extension=$(file -mime-type "$file" | cut -d '/' -f2)
-                extension=${file##*.}
+		if [ -s $file ]; then
+                 extension=$(file -mime-type "$file" | cut -d '/' -f2)
+		else
+		 extension=${file##*.}
+		fi
                 echo "$extension"
                 dir="$parent_dir/$extension"
                 if [ ! -d "$dir" ];then
                 mkdir -p "$dir"
                 fi
+		mv "$file" "$dir/"
         fi
-        mv "$file" "$dir/"
 
 
 done
